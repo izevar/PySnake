@@ -1,6 +1,8 @@
 #PySnake - Antonio Di Maria 2023
 #this is a simple project i did use to learn pygame 
 #Tested on python 3.9 with pygame 2.5
+#Crdit to Clear Code tutorial on https://www.youtube.com/watch?v=QFvqStqPCRU
+
 import pygame, sys, random
 from pygame.math import Vector2
 
