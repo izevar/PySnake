@@ -6,15 +6,25 @@ import sys
 
 DISPLAY_SIZE_X = 400
 DISPLAY_SIZE_Y = 500
+SURFACE_SIZE_X = 100
+SURFACE_SIZE_Y = 200
 FPS_CAP = 60
+
+#RGB touples
+BACKGROUND_COLOR = (175,215,70)
+SURFACE_COLOR = (0,0,255)
+
+#OBJECTS Positions
+surface_pos_x = 200
+surface_pos_y = 250
 
 #init pygame
 pygame.init()
 
-#create display survace
-scree = pygame.display.set_mode((DISPLAY_SIZE_X,DISPLAY_SIZE_Y))
-#create a clock to limit game speed to FPS_CAP
+#create screen and surace
+screen = pygame.display.set_mode((DISPLAY_SIZE_X, DISPLAY_SIZE_Y))
 
+#create a clock to limit game speed to FPS_CAP
 clock = pygame.time.Clock()
 
 #game loop
@@ -25,5 +35,6 @@ while True:
             pygame.quit()
             sys.exit()
 
+    screen.fill(BACKGROUND_COLOR)
     pygame.display.update()
     clock.tick(FPS_CAP)
