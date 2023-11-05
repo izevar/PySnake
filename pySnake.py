@@ -4,25 +4,26 @@
 import pygame
 import sys
 
-DISPLAY_SIZE_X = 400
-DISPLAY_SIZE_Y = 500
-SURFACE_SIZE_X = 100
-SURFACE_SIZE_Y = 200
+#init pygame
+pygame.init()
+
+#globals 
 FPS_CAP = 60
 
 #RGB touples
 BACKGROUND_COLOR = (175,215,70)
 SURFACE_COLOR = (0,0,255)
 
+#virtual grid
+CELL_SIZE = 40
+CELL_NUMBER = 20
+
 #OBJECTS Positions
 surface_pos_x = 200
 surface_pos_y = 250
 
-#init pygame
-pygame.init()
-
 #create screen and surace
-screen = pygame.display.set_mode((DISPLAY_SIZE_X, DISPLAY_SIZE_Y))
+screen = pygame.display.set_mode((CELL_SIZE*CELL_NUMBER, CELL_SIZE*CELL_NUMBER))
 
 #create a clock to limit game speed to FPS_CAP
 clock = pygame.time.Clock()
