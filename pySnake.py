@@ -4,6 +4,24 @@
 import pygame, sys, random
 from pygame.math import Vector2
 
+#init pygame
+pygame.init()
+
+#timers 
+FPS_CAP = 60
+SCREEN_UPDATE = pygame.USEREVENT
+pygame.time.set_timer(SCREEN_UPDATE, 150) #timer in milliseconds
+
+#RGB touples
+BACKGROUND_COLOR = (175,215,70)
+SURFACE_COLOR = (0,0,255)
+FRUIT_COLOR = (56,199,15)
+SNAKE_COLOR = (203,111,111)
+
+#virtual grid
+CELL_SIZE = 40
+CELL_NUMBER = 20
+
 class FRUIT:
     def __init__(self):
         #x and y pos
@@ -74,24 +92,6 @@ class MAIN:
     def game_over(self):
         pygame.quit()
         sys.exit()        
-
-#init pygame
-pygame.init()
-
-#timers 
-FPS_CAP = 60
-SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 150) #timer in milliseconds
-
-#RGB touples
-BACKGROUND_COLOR = (175,215,70)
-SURFACE_COLOR = (0,0,255)
-FRUIT_COLOR = (56,199,15)
-SNAKE_COLOR = (203,111,111)
-
-#virtual grid
-CELL_SIZE = 40
-CELL_NUMBER = 20
 
 #create screen and surace
 screen = pygame.display.set_mode((CELL_SIZE*CELL_NUMBER, CELL_SIZE*CELL_NUMBER))
