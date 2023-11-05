@@ -6,12 +6,16 @@ import sys
 
 DISPLAY_SIZE_X = 400
 DISPLAY_SIZE_Y = 500
+FPS_CAP = 60
 
 #init pygame
 pygame.init()
 
 #create display survace
 scree = pygame.display.set_mode((DISPLAY_SIZE_X,DISPLAY_SIZE_Y))
+#create a clock to limit game speed to FPS_CAP
+
+clock = pygame.time.Clock()
 
 #game loop
 while True:
@@ -22,3 +26,4 @@ while True:
             sys.exit()
 
     pygame.display.update()
+    clock.tick(FPS_CAP)
