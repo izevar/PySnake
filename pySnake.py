@@ -48,10 +48,6 @@ SNAKE_COLOR = (203,111,111)
 CELL_SIZE = 40
 CELL_NUMBER = 20
 
-#OBJECTS Positions
-surface_pos_x = 200
-surface_pos_y = 250
-
 #create screen and surace
 screen = pygame.display.set_mode((CELL_SIZE*CELL_NUMBER, CELL_SIZE*CELL_NUMBER))
 
