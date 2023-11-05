@@ -13,9 +13,25 @@ class FRUIT:
 
     #draw fruit
     def draw_fruit(self):
-        fruit_rect = pygame.Rect(int(self.pos.x*CELL_SIZE), int(self.pos.y*CELL_SIZE), CELL_SIZE, CELL_SIZE)
+        fruit_rect = pygame.Rect(self.pos.x*CELL_SIZE,
+                                 self.pos.y*CELL_SIZE,
+                                 CELL_SIZE, 
+                                 CELL_SIZE)
         pygame.draw.rect(screen, FRUIT_COLOR, fruit_rect)
-        
+
+class SNAKE:
+    def __init__(self):
+        #starting position
+        self.body = [Vector2(5,10),Vector2(6,10),Vector2(7,10)]
+    
+    def draw_snake(self):
+        for block in self.body:
+            block_rect = pygame.Rect(block.x * CELL_SIZE,
+                                     block.y * CELL_SIZE,
+                                     CELL_SIZE,
+                                     CELL_SIZE)
+            pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
+
 #init pygame
 pygame.init()
 
@@ -25,7 +41,8 @@ FPS_CAP = 60
 #RGB touples
 BACKGROUND_COLOR = (175,215,70)
 SURFACE_COLOR = (0,0,255)
-FRUIT_COLOR = (126,166,144)
+FRUIT_COLOR = (56,199,15)
+SNAKE_COLOR = (203,111,111)
 
 #virtual grid
 CELL_SIZE = 40
@@ -43,6 +60,7 @@ clock = pygame.time.Clock()
 
 #game objects
 fruit = FRUIT()
+snake = SNAKE()
 
 #game loop
 while True:
@@ -54,5 +72,7 @@ while True:
 
     screen.fill(BACKGROUND_COLOR)
     fruit.draw_fruit()
+    snake.draw_snake()
+    
     pygame.display.update()
     clock.tick(FPS_CAP)
