@@ -12,8 +12,8 @@ pygame.init()
 
 #timers 
 FPS_CAP = 60
+GAME_SPEED = 150 #timer in milliseconds
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 150) #timer in milliseconds
 
 #RGB touples
 BACKGROUND_COLOR = (75,75,75)
@@ -106,6 +106,7 @@ screen = pygame.display.set_mode((CELL_SIZE*CELL_NUMBER, CELL_SIZE*CELL_NUMBER))
 
 #create a clock to limit game speed to FPS_CAP
 clock = pygame.time.Clock()
+pygame.time.set_timer(SCREEN_UPDATE, GAME_SPEED) 
 
 main_game = MAIN()
 
