@@ -33,7 +33,7 @@ CELL_NUMBER = 30
 #fonts
 FONT_SIZE = 28
 score_font = pygame.font.Font('SourceAssets/SevenSegment.ttf', FONT_SIZE)
-final_score_font = pygame.font.Font('SourceAssets/SevenSegment.ttf', FONT_SIZE*5)
+final_score_font = pygame.font.Font('SourceAssets/SevenSegment.ttf', FONT_SIZE*6)
 
 class FRUIT:
     def __init__(self):
@@ -181,8 +181,7 @@ class MAIN:
         score_text = str(len(self.snake.body) -3)
         score_surface = final_score_font.render(score_text,True,SCORE_COLOR)
         score_rect = score_surface.get_rect(center = (screen.get_width()/2, screen.get_height()/2))
-        screen.blit(score_surface, score_rect)
-        
+        screen.blit(score_surface, score_rect)      
     def game_over(self):
         if (len(self.snake.body) > 3):
             self.show_final_score()
