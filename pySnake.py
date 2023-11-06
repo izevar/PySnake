@@ -16,6 +16,7 @@ SCREEN_UPDATE = pygame.USEREVENT
 
 #RGB touples
 BACKGROUND_COLOR = (75,75,75)
+GRASS_COLOR = (80,80,80)
 FRUIT_COLOR = (56,199,15)
 SNAKE_COLOR = (150,123,0)
 
@@ -106,6 +107,7 @@ class MAIN:
         self.check_collision()
         self.check_fail()
     def draw_elements(self):
+        self.draw_grass()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
     def check_collision(self):
@@ -122,6 +124,21 @@ class MAIN:
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
                 self.game_over()
+    
+    def draw_grass(sef):
+        for row in range(CELL_NUMBER):     
+            if row % 2 == 0:
+                for col in range(CELL_NUMBER):
+                    if col % 2 == 0:
+                        grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+                        pygame.draw.rect(screen, GRASS_COLOR, grass_rect)
+            else:
+                for col in range(CELL_NUMBER):
+                    if col % 2 == 1:
+                        grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+                        pygame.draw.rect(screen, GRASS_COLOR, grass_rect)
+
+
     def game_over(self):
         pygame.quit()
         sys.exit()        
