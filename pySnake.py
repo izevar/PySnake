@@ -65,15 +65,21 @@ class SNAKE:
                                      CELL_SIZE,
                                      CELL_SIZE)
             if index == 0: #head
-                #calculate direction
-                head_direction = self.body[1] - self.body[0]
+                #calculate head direction
+                direction = self.body[1] - self.body[0]
                 #dwaw correct asset
-                if head_direction == Vector2(1,0): screen.blit(self.head_left,block_rect)
-                elif head_direction == Vector2(-1,0): screen.blit(self.head_right,block_rect)
-                elif head_direction == Vector2(0,1): screen.blit(self.head_up,block_rect)
-                elif head_direction == Vector2(0,-1): screen.blit(self.head_down,block_rect)
-            elif index == len(self.body) -1:
-
+                if direction == Vector2(1,0): screen.blit(self.head_left,block_rect)
+                elif direction == Vector2(-1,0): screen.blit(self.head_right,block_rect)
+                elif direction == Vector2(0,1): screen.blit(self.head_up,block_rect)
+                elif direction == Vector2(0,-1): screen.blit(self.head_down,block_rect)
+            elif index == len(self.body) -1: #tail
+                #calculate tail direction
+                direction = self.body[len(self.body) -2] - self.body[len(self.body) -1]
+                #dwaw correct asset
+                if direction == Vector2(1,0): screen.blit(self.tail_left,block_rect)
+                elif direction == Vector2(-1,0): screen.blit(self.tail_right,block_rect)
+                elif direction == Vector2(0,1): screen.blit(self.tail_up,block_rect)
+                elif direction == Vector2(0,-1): screen.blit(self.tail_down,block_rect)
             else:   
                 pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
 
