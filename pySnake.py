@@ -12,7 +12,7 @@ pygame.init()
 
 #timers 
 FPS_CAP = 60
-GAME_SPEED = 200 #timer in milliseconds
+GAME_SPEED = 190 #timer in milliseconds
 SCREEN_UPDATE = pygame.USEREVENT
 
 #RGB touples
