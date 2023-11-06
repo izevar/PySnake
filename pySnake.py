@@ -11,7 +11,7 @@ pygame.init()
 
 #timers 
 FPS_CAP = 60
-GAME_SPEED = 150 #timer in milliseconds
+GAME_SPEED = 200 #timer in milliseconds
 SCREEN_UPDATE = pygame.USEREVENT
 
 #RGB touples
@@ -19,13 +19,16 @@ BACKGROUND_COLOR = (75,75,75)
 GRASS_COLOR = (80,80,80)
 FRUIT_COLOR = (56,199,15)
 SNAKE_COLOR = (150,123,0)
+SCORE_COLOR = (250,0,0)
+SCORE_BG = (90,90,90)
 
 #virtual grid
 CELL_SIZE = 20
 CELL_NUMBER = 30
 
 #fonts
-score_font = pygame.font.Font(None, 25)
+FONT_SIZE = 28
+score_font = pygame.font.Font('SourceAssets/SevenSegment.ttf', FONT_SIZE)
 
 class FRUIT:
     def __init__(self):
@@ -104,7 +107,9 @@ class MAIN:
     def __init__(self):
         self.snake = SNAKE()
         self.fruit = FRUIT()
-
+    def increase_speed(self):
+        #to do
+        pass
     def update(self):
         self.snake.move_snake()
         self.check_collision()
@@ -113,11 +118,13 @@ class MAIN:
         self.draw_grass()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
+        self.draw_score()
     def check_collision(self):
         # snake got the fruit
         if self.fruit.pos == self.snake.body[0]:
             self.fruit.randomize()
             self.snake.add_block()
+            self.increase_speed()
     def check_fail(self):
         # control borders
         if not 0 <= self.snake.body[0].x < CELL_NUMBER:
@@ -139,6 +146,16 @@ class MAIN:
                     if col % 2 == 1:
                         grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                         pygame.draw.rect(screen, GRASS_COLOR, grass_rect)
+    def draw_score(self):
+        score_text = str(len(self.snake.body) -3)
+        score_surface = score_font.render(score_text,True,SCORE_COLOR)
+        score_x = int(CELL_SIZE * CELL_NUMBER -60)
+        score_y = int(CELL_SIZE * CELL_NUMBER -40)
+        score_rect = score_surface.get_rect(center = (score_x, score_y))
+        bg_rect = pygame.Rect(score_rect.left, score_rect.top, score_rect.width, score_rect.height)
+        pygame.draw.rect(screen, SCORE_BG, bg_rect)
+        screen.blit(score_surface, score_rect)
+
     def game_over(self):
         pygame.quit()
         sys.exit()        
