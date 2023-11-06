@@ -7,6 +7,7 @@ import pygame, sys, random
 from pygame.math import Vector2
 
 #init pygame
+pygame.mixer.pre_init(44100,-16,2,512)
 pygame.init()
 
 #timers 
@@ -21,6 +22,7 @@ FRUIT_COLOR = (56,199,15)
 SNAKE_COLOR = (150,123,0)
 SCORE_COLOR = (250,0,0)
 SCORE_BG = (90,90,90)
+SCORE_FRAME = (0,0,0)
 
 #virtual grid
 CELL_SIZE = 20
@@ -60,11 +62,12 @@ class SNAKE:
         self.tail_down = pygame.image.load('Graphics/tail_down.png').convert_alpha()
         self.tail_left = pygame.image.load('Graphics/tail_l.png').convert_alpha()
         self.tail_right = pygame.image.load('Graphics/tail_r.png').convert_alpha()
+        #Load Sound Assets
+        self.crunch_sound = pygame.mixer.Sound('Sound/eating.mp3')
         #starting position
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
         self.direction = Vector2(1,0) #right
         self.new_block = False
-    
     def draw_snake(self):
         for index,block in enumerate(self.body):
             block_rect = pygame.Rect(block.x * CELL_SIZE,
@@ -89,7 +92,6 @@ class SNAKE:
                 elif direction == Vector2(0,-1): screen.blit(self.tail_down,block_rect)
             else:   
                 pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
-
     def move_snake(self):
         #create a copy of the snake, discard the last block.
         #add a new blok at the beginning of the list in the directon of movement
@@ -102,6 +104,8 @@ class SNAKE:
         self.body = body_copy[:]
     def add_block(self):
         self.new_block = True
+    def play_crunch_sound (self):
+        self.crunch_sound.play()
 
 class MAIN:
     def __init__(self):
@@ -122,6 +126,7 @@ class MAIN:
     def check_collision(self):
         # snake got the fruit
         if self.fruit.pos == self.snake.body[0]:
+            self.snake.play_crunch_sound()
             self.fruit.randomize()
             self.snake.add_block()
             self.increase_speed()
@@ -152,10 +157,10 @@ class MAIN:
         score_x = int(CELL_SIZE * CELL_NUMBER -60)
         score_y = int(CELL_SIZE * CELL_NUMBER -40)
         score_rect = score_surface.get_rect(center = (score_x, score_y))
-        bg_rect = pygame.Rect(score_rect.left, score_rect.top, score_rect.width, score_rect.height)
+        bg_rect = pygame.Rect(score_rect.left -6 , score_rect.top -6 , score_rect.width +12, score_rect.height +12)
         pygame.draw.rect(screen, SCORE_BG, bg_rect)
         screen.blit(score_surface, score_rect)
-
+        pygame.draw.rect(screen, SCORE_FRAME, bg_rect, 2)
     def game_over(self):
         pygame.quit()
         sys.exit()        
