@@ -16,6 +16,7 @@ GAME_SPEED = 200 #timer in milliseconds
 SCREEN_UPDATE = pygame.USEREVENT
 
 #RGB touples
+WALL_COLOR = (150,150,150)
 BACKGROUND_COLOR = (75,75,75)
 GRASS_COLOR = (80,80,80)
 FRUIT_COLOR = (56,199,15)
@@ -47,8 +48,8 @@ class FRUIT:
         #pygame.draw.rect(screen, FRUIT_COLOR, fruit_rect)
         screen.blit(self.food, fruit_rect)
     def randomize(self):
-        self.x = random.randint(0, CELL_NUMBER-1)
-        self.y = random.randint(0, CELL_NUMBER-1)
+        self.x = random.randint(1, CELL_NUMBER-2)
+        self.y = random.randint(1, CELL_NUMBER-2)
         self.pos = Vector2(self.x, self.y)
 
 class SNAKE:
@@ -140,25 +141,29 @@ class MAIN:
 
     def check_fail(self):
         # control borders
-        if not 0 <= self.snake.body[0].x < CELL_NUMBER:
+        if not 1 <= self.snake.body[0].x < CELL_NUMBER+1:
             self.game_over()   
-        elif not 0 <= self.snake.body[0].y < CELL_NUMBER:  
+        elif not 1 <= self.snake.body[0].y < CELL_NUMBER+1:  
             self.game_over()   
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
                 self.game_over()   
     def draw_grass(sef):
-        for row in range(CELL_NUMBER):     
+        for row in range(1,CELL_NUMBER+1):     
             if row % 2 == 0:
-                for col in range(CELL_NUMBER):
+                for col in range(1,CELL_NUMBER+1):
+                    grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                     if col % 2 == 0:
-                        grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                         pygame.draw.rect(screen, GRASS_COLOR, grass_rect)
+                    else:
+                        pygame.draw.rect(screen, BACKGROUND_COLOR, grass_rect)
             else:
-                for col in range(CELL_NUMBER):
+                for col in range(1,CELL_NUMBER+1):
+                    grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                     if col % 2 == 1:
-                        grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                         pygame.draw.rect(screen, GRASS_COLOR, grass_rect)
+                    else:
+                        pygame.draw.rect(screen, BACKGROUND_COLOR, grass_rect)
     def draw_score(self):
         score_text = str(len(self.snake.body) -3)
         score_surface = score_font.render(score_text,True,SCORE_COLOR)
@@ -169,13 +174,14 @@ class MAIN:
         pygame.draw.rect(screen, SCORE_BG, bg_rect)
         screen.blit(score_surface, score_rect)
         pygame.draw.rect(screen, SCORE_FRAME, bg_rect, 2)
+    
     def game_over(self):
         if (len(self.snake.body) > 3):
             print ("Score: " + str(len(self.snake.body) -3))
         self.snake.reset()
 
 #create screen and surace
-screen = pygame.display.set_mode((CELL_SIZE*CELL_NUMBER, CELL_SIZE*CELL_NUMBER))
+screen = pygame.display.set_mode((CELL_SIZE*(CELL_NUMBER+2), CELL_SIZE*(CELL_NUMBER+2)))
 
 #create a clock to limit game speed to FPS_CAP
 clock = pygame.time.Clock()
@@ -206,7 +212,7 @@ while True:
                 if main_game.snake.direction.x != -1:    
                     main_game.snake.direction = Vector2(1,0) #right
 
-    screen.fill(BACKGROUND_COLOR)
+    screen.fill(WALL_COLOR)
     main_game.draw_elements()
     pygame.display.update()
     clock.tick(FPS_CAP)
