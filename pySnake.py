@@ -170,7 +170,8 @@ class MAIN:
         screen.blit(score_surface, score_rect)
         pygame.draw.rect(screen, SCORE_FRAME, bg_rect, 2)
     def game_over(self):
-        print ("Score: " + str(len(self.snake.body)))
+        if (len(self.snake.body) > 3):
+            print ("Score: " + str(len(self.snake.body) -3))
         self.snake.reset()
 
 #create screen and surace
