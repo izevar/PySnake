@@ -68,6 +68,8 @@ class SNAKE:
                 elif head_direction == Vector2(-1,0): screen.blit(self.head_right,block_rect)
                 elif head_direction == Vector2(0,1): screen.blit(self.head_up,block_rect)
                 elif head_direction == Vector2(0,-1): screen.blit(self.head_down,block_rect)
+            elif index == len(self.body) -1:
+                
             else:   
                 pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
 
