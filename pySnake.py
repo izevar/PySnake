@@ -49,6 +49,10 @@ class SNAKE:
         self.head_down = pygame.image.load('Graphics/head_down.png').convert_alpha()
         self.head_left = pygame.image.load('Graphics/head_l.png').convert_alpha()
         self.head_right = pygame.image.load('Graphics/head_r.png').convert_alpha()
+        self.tail_up = pygame.image.load('Graphics/tail_up.png').convert_alpha()
+        self.tail_down = pygame.image.load('Graphics/tail_down.png').convert_alpha()
+        self.tail_left = pygame.image.load('Graphics/tail_l.png').convert_alpha()
+        self.tail_right = pygame.image.load('Graphics/tail_r.png').convert_alpha()
         #starting position
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
         self.direction = Vector2(1,0) #right
@@ -69,7 +73,7 @@ class SNAKE:
                 elif head_direction == Vector2(0,1): screen.blit(self.head_up,block_rect)
                 elif head_direction == Vector2(0,-1): screen.blit(self.head_down,block_rect)
             elif index == len(self.body) -1:
-                
+
             else:   
                 pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
 
