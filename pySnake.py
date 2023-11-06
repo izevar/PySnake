@@ -110,14 +110,14 @@ class SNAKE:
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
         self.direction = Vector2(0,0) #right
         self.new_block = False
+        pygame.time.set_timer(SCREEN_UPDATE, GAME_SPEED - len(self.body)) 
 
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
         self.fruit = FRUIT()
     def increase_speed(self):
-        #to do
-        pass
+        pygame.time.set_timer(SCREEN_UPDATE, GAME_SPEED - len(self.snake.body)) 
     def update(self):
         self.snake.move_snake()
         self.check_collision()
@@ -170,6 +170,7 @@ class MAIN:
         screen.blit(score_surface, score_rect)
         pygame.draw.rect(screen, SCORE_FRAME, bg_rect, 2)
     def game_over(self):
+        print ("Score: " + str(len(self.snake.body)))
         self.snake.reset()
 
 #create screen and surace
