@@ -27,7 +27,7 @@ CELL_NUMBER = 40
 class FRUIT:
     def __init__(self):
         #Load PNG Assets
-        #self.food = pygame.image.load('Graphics/food.png').convert_alpha()
+        self.food = pygame.image.load('Graphics/food.png').convert_alpha()
         #Randomize fruit position
         self.randomize()
     #draw fruit
@@ -36,8 +36,8 @@ class FRUIT:
                                  self.pos.y*CELL_SIZE,
                                  CELL_SIZE, 
                                  CELL_SIZE)
-        pygame.draw.rect(screen, FRUIT_COLOR, fruit_rect)
-        #screen.blit(self.food, fruit_rect)
+        #pygame.draw.rect(screen, FRUIT_COLOR, fruit_rect)
+        screen.blit(self.food, fruit_rect)
     def randomize(self):
         self.x = random.randint(0, CELL_NUMBER-1)
         self.y = random.randint(0, CELL_NUMBER-1)
