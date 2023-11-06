@@ -2,7 +2,6 @@
 #this is a simple project i did use to learn pygame 
 #Tested on python 3.9 with pygame 2.5
 #Crdit to Clear Code tutorial on https://www.youtube.com/watch?v=QFvqStqPCRU
-#Credit to pngtree for the PNG assets
 
 import pygame, sys, random
 from pygame.math import Vector2
@@ -22,7 +21,7 @@ SNAKE_COLOR = (203,111,111)
 
 #virtual grid
 CELL_SIZE = 20
-CELL_NUMBER = 40
+CELL_NUMBER = 30
 
 class FRUIT:
     def __init__(self):
