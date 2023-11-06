@@ -14,6 +14,7 @@ pygame.init()
 FPS_CAP = 60
 GAME_SPEED = 190 #timer in milliseconds
 SCREEN_UPDATE = pygame.USEREVENT
+FINAL_SCREEN_DELAY = 4000
 
 #RGB touples
 WALL_COLOR = (77,13,0)
@@ -32,6 +33,7 @@ CELL_NUMBER = 30
 #fonts
 FONT_SIZE = 28
 score_font = pygame.font.Font('SourceAssets/SevenSegment.ttf', FONT_SIZE)
+final_score_font = pygame.font.Font('SourceAssets/SevenSegment.ttf', FONT_SIZE*5)
 
 class FRUIT:
     def __init__(self):
@@ -174,10 +176,18 @@ class MAIN:
         pygame.draw.rect(screen, SCORE_BG, bg_rect)
         screen.blit(score_surface, score_rect)
         pygame.draw.rect(screen, SCORE_FRAME, bg_rect, 2)
-    
+    def show_final_score(self):
+        screen.fill(WALL_COLOR)
+        score_text = str(len(self.snake.body) -3)
+        score_surface = final_score_font.render(score_text,True,SCORE_COLOR)
+        score_rect = score_surface.get_rect(center = (screen.get_width()/2, screen.get_height()/2))
+        screen.blit(score_surface, score_rect)
+        
     def game_over(self):
         if (len(self.snake.body) > 3):
-            print ("Score: " + str(len(self.snake.body) -3))
+            self.show_final_score()
+            pygame.display.update()
+            pygame.time.wait(FINAL_SCREEN_DELAY)
         self.snake.reset()
 
 #create screen and surace
