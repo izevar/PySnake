@@ -17,7 +17,7 @@ SCREEN_UPDATE = pygame.USEREVENT
 #RGB touples
 BACKGROUND_COLOR = (75,75,75)
 FRUIT_COLOR = (56,199,15)
-SNAKE_COLOR = (203,111,111)
+SNAKE_COLOR = (150,123,0)
 
 #virtual grid
 CELL_SIZE = 20
@@ -45,18 +45,32 @@ class FRUIT:
 class SNAKE:
     def __init__(self):
         #Load PNG Assets
-
+        self.head_up = pygame.image.load('Graphics/head_up.png').convert_alpha()
+        self.head_down = pygame.image.load('Graphics/head_down.png').convert_alpha()
+        self.head_left = pygame.image.load('Graphics/head_l.png').convert_alpha()
+        self.head_right = pygame.image.load('Graphics/head_r.png').convert_alpha()
         #starting position
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
         self.direction = Vector2(1,0) #right
         self.new_block = False
+    
     def draw_snake(self):
-        for block in self.body:
+        for index,block in enumerate(self.body):
             block_rect = pygame.Rect(block.x * CELL_SIZE,
                                      block.y * CELL_SIZE,
                                      CELL_SIZE,
                                      CELL_SIZE)
-            pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
+            if index == 0: #head
+                #calculate direction
+                head_direction = self.body[1] - self.body[0]
+                #dwaw correct asset
+                if head_direction == Vector2(1,0): screen.blit(self.head_left,block_rect)
+                elif head_direction == Vector2(-1,0): screen.blit(self.head_right,block_rect)
+                elif head_direction == Vector2(0,1): screen.blit(self.head_up,block_rect)
+                elif head_direction == Vector2(0,-1): screen.blit(self.head_down,block_rect)
+            else:   
+                pygame.draw.rect(screen, SNAKE_COLOR, block_rect)
+
     def move_snake(self):
         #create a copy of the snake, discard the last block.
         #add a new blok at the beginning of the list in the directon of movement
