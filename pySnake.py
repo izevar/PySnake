@@ -24,6 +24,9 @@ SNAKE_COLOR = (150,123,0)
 CELL_SIZE = 20
 CELL_NUMBER = 30
 
+#fonts
+score_font = pygame.font.Font(None, 25)
+
 class FRUIT:
     def __init__(self):
         #Load PNG Assets
@@ -123,8 +126,7 @@ class MAIN:
             self.game_over()   
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
-                self.game_over()
-    
+                self.game_over()   
     def draw_grass(sef):
         for row in range(CELL_NUMBER):     
             if row % 2 == 0:
@@ -137,8 +139,6 @@ class MAIN:
                     if col % 2 == 1:
                         grass_rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                         pygame.draw.rect(screen, GRASS_COLOR, grass_rect)
-
-
     def game_over(self):
         pygame.quit()
         sys.exit()        
