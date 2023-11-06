@@ -66,7 +66,7 @@ class SNAKE:
         self.crunch_sound = pygame.mixer.Sound('Sound/eating.mp3')
         #starting position
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
-        self.direction = Vector2(1,0) #right
+        self.direction = Vector2(0,0) #right
         self.new_block = False
     def draw_snake(self):
         for index,block in enumerate(self.body):
@@ -106,6 +106,10 @@ class SNAKE:
         self.new_block = True
     def play_crunch_sound (self):
         self.crunch_sound.play()
+    def reset(self):
+        self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
+        self.direction = Vector2(0,0) #right
+        self.new_block = False
 
 class MAIN:
     def __init__(self):
@@ -133,7 +137,7 @@ class MAIN:
         for block in self.snake.body[1:]:
             if block == self.fruit.pos:
                 self.fruit.randomize()
-                    
+
     def check_fail(self):
         # control borders
         if not 0 <= self.snake.body[0].x < CELL_NUMBER:
@@ -166,8 +170,7 @@ class MAIN:
         screen.blit(score_surface, score_rect)
         pygame.draw.rect(screen, SCORE_FRAME, bg_rect, 2)
     def game_over(self):
-        pygame.quit()
-        sys.exit()        
+        self.snake.reset()
 
 #create screen and surace
 screen = pygame.display.set_mode((CELL_SIZE*CELL_NUMBER, CELL_SIZE*CELL_NUMBER))
