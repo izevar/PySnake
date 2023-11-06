@@ -187,7 +187,7 @@ class MAIN:
         if (len(self.snake.body) > 3):
             self.show_final_score()
             pygame.display.update()
-            pygame.time.wait(FINAL_SCREEN_DELAY)
+            pygame.time.delay(FINAL_SCREEN_DELAY)
         self.snake.reset()
 
 #create screen and surace
