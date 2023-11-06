@@ -2,6 +2,7 @@
 #this is a simple project i did use to learn pygame 
 #Tested on python 3.9 with pygame 2.5
 #Crdit to Clear Code tutorial on https://www.youtube.com/watch?v=QFvqStqPCRU
+#Credit to pngtree for the PNG assets
 
 import pygame, sys, random
 from pygame.math import Vector2
@@ -15,18 +16,19 @@ SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150) #timer in milliseconds
 
 #RGB touples
-BACKGROUND_COLOR = (175,215,70)
-SURFACE_COLOR = (0,0,255)
+BACKGROUND_COLOR = (75,75,75)
 FRUIT_COLOR = (56,199,15)
 SNAKE_COLOR = (203,111,111)
 
 #virtual grid
-CELL_SIZE = 40
-CELL_NUMBER = 20
+CELL_SIZE = 20
+CELL_NUMBER = 40
 
 class FRUIT:
     def __init__(self):
-        #x and y pos
+        #Load PNG Assets
+        #self.food = pygame.image.load('Graphics/food.png').convert_alpha()
+        #Randomize fruit position
         self.randomize()
     #draw fruit
     def draw_fruit(self):
@@ -35,6 +37,7 @@ class FRUIT:
                                  CELL_SIZE, 
                                  CELL_SIZE)
         pygame.draw.rect(screen, FRUIT_COLOR, fruit_rect)
+        #screen.blit(self.food, fruit_rect)
     def randomize(self):
         self.x = random.randint(0, CELL_NUMBER-1)
         self.y = random.randint(0, CELL_NUMBER-1)
@@ -42,6 +45,8 @@ class FRUIT:
 
 class SNAKE:
     def __init__(self):
+        #Load PNG Assets
+
         #starting position
         self.body = [Vector2(5,10),Vector2(4,10),Vector2(3,10)]
         self.direction = Vector2(1,0) #right
@@ -70,6 +75,7 @@ class MAIN:
     def __init__(self):
         self.snake = SNAKE()
         self.fruit = FRUIT()
+
     def update(self):
         self.snake.move_snake()
         self.check_collision()
@@ -128,6 +134,5 @@ while True:
 
     screen.fill(BACKGROUND_COLOR)
     main_game.draw_elements()
-
     pygame.display.update()
     clock.tick(FPS_CAP)
